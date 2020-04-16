@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet,
         TouchableOpacity,
         Text} from 'react-native';
+import { styles } from './styles';
 
 export default class Filter extends React.PureComponent { 
  render() {
@@ -13,12 +14,3 @@ export default class Filter extends React.PureComponent {
    );
  }
 }
-         
-const styles = StyleSheet.create({
-
-  filterText: {
-  padding:1,
-  fontSize:16
-  },
-});
-
