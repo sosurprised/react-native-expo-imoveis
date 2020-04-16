@@ -21,6 +21,7 @@ export default class Card extends React.Component {
     
  render() {
    return (
+    !this.props.item.address.formattedAddress.includes("Rua Desconhecida") && this.props.item.publish != false ?
        <TouchableOpacity style={styles.card} onPress={this.handleHideDetails}>
         <Image style={styles.cardImage} source={{uri: this.props.item.images[0]}} /> 
         <Text style={styles.cardTitleText}> Imóvel a Venda</Text>
@@ -32,7 +33,7 @@ export default class Card extends React.Component {
             <Text style={styles.cardText}>Quarto(s): {this.props.item.bedrooms} / Banheiro(s): {this.props.item.bathrooms}</Text>
             <Text style={styles.cardText}>Estacionamento Vaga(s): {this.props.item.parkingSpaces}</Text>
         </View> : null} 
-       </TouchableOpacity>
+       </TouchableOpacity> : <View></View>
            
    );
  }
