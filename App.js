@@ -1,26 +1,54 @@
-import React from 'react';
-import {View, Image, ScrollView, Dimensions} from 'react-native';
+import React, {Component}from 'react';
+import {FlatList,
+        View} from 'react-native';
+import Card from './components/Card/Card';      
+import Filter from './components/Filter/Filter'; 
+import { styles } from './components/styles';
 
-const {width} = Dimensions.get('window');
-const height = width * 0.6;
+export default class App extends Component { 
 
-const images = ["https://i.imgur.com/ad0cUuB.jpg","https://i.imgur.com/7gdtIyN.jpg","https://i.imgur.com/V6bBVyF.jpg","https://i.imgur.com/WQ3gkSo.jpg","https://i.imgur.com/XAGtg4a.jpg","https://i.imgur.com/JMcV63z.jpg"]
-
-
-export default class App extends React.Component{
-render() {
-  return(
-    <View style={{marginTop: 50, width, height}}>
-       <ScrollView pagingEnabled horizontal style={{width, height}}>
-{
-  images.map((image, index) => (
-<Image 
-     key={index}
-     source={{uri: image}} style={{width, height, resizeMode: 'contain'}}/> 
-  ))
-}
-    </ScrollView>
-    </View>
-    )
+  constructor() {
+    super();
+    this.state = {
+      items: []     
+    }
   }
+
+    
+  componentDidMount() {
+     this._get('http://www.mocky.io/v2/5e8bbc982f00006d0088c4ed').then(
+       data => {
+         this.setState({items: data})
+       }
+    )
 }
+
+_get = async (endpoint) => {
+  const res = await fetch(endpoint);
+  const data = await res.json();
+  return data;
+  }
+ 
+
+ render() {
+     
+   return (
+
+    <View> 
+
+    <Filter /> 
+    
+    <View>
+      <FlatList 
+       style={styles.container}
+       data={this.state.items}
+       keyExtractor={(item, index) => index.toString()}
+       renderItem={({item}) => <Card item={item}/>}
+     /> 
+    </View> 
+     </View>
+   );
+ } 
+}
+
+         
