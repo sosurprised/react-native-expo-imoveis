@@ -1,9 +1,6 @@
 import React, {Component}from 'react';
 import {ScrollView,
         FlatList,
-        TouchableOpacity,
-        ActivityIndicator,
-        Text,
         View} from 'react-native';
 import Card from './components/Card/Card';      
 import Filter from './components/Filter/Filter'; 
